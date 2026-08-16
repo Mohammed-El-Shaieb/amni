@@ -12,9 +12,12 @@
     },
     "lint": {},
     "typecheck": {
-      "dependsOn": ["^typecheck"]
+      "dependsOn": ["^build"]
     },
     "test": {
+      "dependsOn": ["^build"]
+    },
+    "test:isolation": {
       "dependsOn": ["^build"]
     },
     "test:e2e": {

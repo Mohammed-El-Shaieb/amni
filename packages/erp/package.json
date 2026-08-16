@@ -1,6 +1,6 @@
 {
   "name": "@amni/erp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Typed ERPNext REST client + provisioning helpers. The only code that talks to ERPNext.",
   "type": "module",
@@ -13,13 +13,15 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
     "@amni/db": "workspace:*",

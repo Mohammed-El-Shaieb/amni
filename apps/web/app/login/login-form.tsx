@@ -6,7 +6,7 @@ import { Button, Input, Label } from "@amni/ui";
 import { api, ApiError } from "@/src/lib/api";
 import type { MeUser } from "@/src/hooks/use-me";
 
-export function LoginForm() {
+export function LoginForm({ next = "/dashboard" }: { next?: string }) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -18,11 +18,11 @@ export function LoginForm() {
 
     const form = new FormData(event.currentTarget);
     try {
-      await api<{ data: { user: MeUser } }>("/auth/login", {
+      const data = await api<{ data: { user: MeUser } }>("/auth/login", {
         method: "POST",
         body: { email: form.get("email"), password: form.get("password") },
       });
-      router.push("/dashboard");
+      router.push(data.data.user.isPlatformAdmin ? "/admin" : next);
       router.refresh();
     } catch (e) {
       setError(e instanceof ApiError ? e.message : "Something went wrong. Please try again.");
